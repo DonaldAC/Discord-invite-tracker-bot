@@ -64,7 +64,7 @@ async function onNewUser(member, client) {
       .setURL(`https://discord.gg/${usedCode}`)
       .setAuthor({ name: `${member.user.tag}`, url: `https://discord.gg/${usedCode}`, icon_url: `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.png`})
       .setTimestamp()
-      .setFooter({ text: 'Log By Discord invite Tracker v1.0', iconURL: 'https://ibb.co/8cm4s1v' });
+      .setFooter({ text: 'Log By Discord invite Tracker v1.0', iconURL: `${process.env.ICON_URL}` });
       console.log(embedMsg);
       channel.send({ embeds: [embedMsg] });
   } else {
