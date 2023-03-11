@@ -56,7 +56,6 @@ async function onNewUser(member, client) {
     const serverName = guild.name;
     const message = `User ${member.user.id} joined using code ${usedCode} on server ${serverName}`;
     console.log(message);
-    channel.send(message);
 
     const embedMsg = new EmbedBuilder()
       .setColor(0x0099FF)
