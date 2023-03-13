@@ -1,5 +1,3 @@
-import { EmbedBuilder } from 'discord.js';
-
 /**
  * Compare two objects
  * @param {object} objA - The first object to compare
@@ -39,7 +37,7 @@ async function fetchGuildInvites (guild) {
 /**
  * Get new invite values and check the one which has incremented.
  * @param {object} member - The new member object 
- * @returns 
+ * @returns  {object} Information of the new user.
  */
 async function onNewUser(member, client) {
   if(member.user.bot) return;
@@ -50,24 +48,17 @@ async function onNewUser(member, client) {
   const newInvites = await fetchGuildInvites(guild)
 
   const usedCode = compareObjects(client.guildInvites, newInvites);
-   
-   if (usedCode && usedCode.length > 0) {
-    const channel = guild.channels.cache.get(process.env.WELCOME_CHANNEL_ID);
-    const serverName = guild.name;
-    const message = `User ${member.user.id} joined using code ${usedCode} on server ${serverName}`;
-    console.log(message);
 
-    const embedMsg = new EmbedBuilder()
-      .setColor(0x0099FF)
-      .setTitle('New User Joined!!')
-      .setURL(`https://discord.gg/${usedCode}`)
-      .setAuthor({ name: `${member.user.tag}`, url: `https://discord.gg/${usedCode}`, icon_url: `https://cdn.discordapp.com/avatars/${member.user.id}/${member.user.avatar}.png`})
-      .setTimestamp()
-      .setFooter({ text: 'Log By Discord invite Tracker v1.0', iconURL: `${process.env.ICON_URL}` });
-      console.log(embedMsg);
-      channel.send({ embeds: [embedMsg] });
-  } else {
-    console.log(`User ${member.user.tag} which has the ID ${member.user.id} joined without using an invite`);
+  if (usedCode && usedCode.length > 0) {
+  const serverName = guild.name;
+  const message = `${member.user.username} with the ID: ${member.user.id} joined using code ${usedCode} on server ${serverName}`;
+  console.log(message);
+  
+    return {
+      name: `${member.user.username}`,
+      code: `${usedCode}`,
+      userId: `${member.user.id}`
+    };
   }
 }
 

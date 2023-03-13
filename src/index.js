@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { Client, GatewayIntentBits } from 'discord.js';
 import handler from './handler.js';
+import sendEvent from './sendEvent.js';
 
 dotenv.config();
 
@@ -31,7 +32,10 @@ client.on('inviteCreate', async (invite) => {
 
 // we retrieve the new Invites values and compare them with  their previous values.
 client.on('guildMemberAdd', async (member) => {
-  await handler.onNewUser(member, client);
+  const userData = await handler.onNewUser(member, client);
+  console.log('New User: ', userData);
+
+  await sendEvent(userData.userId, userData.code);
 });
 
 // Log our bot to discord API.
