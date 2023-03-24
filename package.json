@@ -5,12 +5,15 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon src/index.js",
+    "ads": "nodemon src/ads.js"
   },
   "dependencies": {
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
-    "node-fetch": "^3.3.1",
+    "facebook-nodejs-business-sdk": "^16.0.1",
+    "lodash": "^4.17.21",
+    "mysql": "^2.18.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
